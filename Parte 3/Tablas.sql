@@ -1,4 +1,4 @@
---create database BancoXY
+create database BancoXY
 go
 use BancoXY
 go
@@ -27,18 +27,18 @@ Create table Ahorro(
 
 go
 create table Prestamo(
-	Id_prestamo int primary key identity(1,1),
-	Id_cuenta int foreign key references Cuenta(Id_cuenta),
+	Id_cuenta int primary key foreign key references Cuenta(Id_cuenta),
 	CantidadCuotas int not null,
 	Monto decimal(12,1) not null,
 	Saldo decimal(12,1) not null
 )
+drop table Prestamo
 --Se agrego el campo Id_prestamo para que sea la primary key ya que el Id_cuenta no puede serlo esto debido a que en esta 
 --tabla esta contemplado que una cuenta pueda tener mas de un prestamo
 go
 create table PagoPrestamo(
 	Id_pago int primary key identity(1,1),
-	Id_cuenta int foreign key references Prestamo(Id_prestamo),
+	Id_cuenta int foreign key references Prestamo(Id_cuenta),
 	Monto decimal(12,1) not null,
 	Fecha datetime default getdate() not null
 )
